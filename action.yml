@@ -1,0 +1,37 @@
+name: OpenAPI Breaking Change Checker
+description: Fail a pull request when an OpenAPI or Swagger change would likely break existing API clients.
+author: Martin Grüner
+branding:
+  icon: shield
+  color: green
+inputs:
+  spec:
+    description: Path to an OpenAPI or Swagger file (JSON or YAML). It is compared with the same file at base-ref.
+    required: false
+  base-ref:
+    description: Git ref to read the earlier version of spec from. Defaults to origin/<pull request base branch>, or HEAD~1 outside pull requests.
+    required: false
+  base:
+    description: Path to the earlier API description. Use with head instead of spec.
+    required: false
+  head:
+    description: Path to the new API description. Use with base instead of spec.
+    required: false
+  fail-on:
+    description: "When to fail the step: breaking (default), review (breaking or review-needed changes), or never."
+    required: false
+    default: breaking
+outputs:
+  breaking:
+    description: Number of likely breaking changes.
+  review:
+    description: Number of changes that need review.
+  compatible:
+    description: Number of compatible changes.
+  result:
+    description: pass, fail, or skipped (spec did not exist at base-ref).
+  report:
+    description: Path to the Markdown report.
+runs:
+  using: node24
+  main: dist/index.cjs

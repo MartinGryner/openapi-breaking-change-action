@@ -1,0 +1,31 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - run: npm ci
+      - run: npm test
+      - name: Bundle is up to date
+        run: git diff --exit-code dist/
+
+  action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - id: check
+        uses: ./
+        with:
+          base: examples/orders-v1.yaml
+          head: examples/orders-v2.yaml
+          fail-on: never
+      - name: The example has breaking changes
+        run: test "${{ steps.check.outputs.breaking }}" -gt 0 && test "${{ steps.check.outputs.result }}" = pass

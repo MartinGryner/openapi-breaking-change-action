@@ -1,0 +1,28 @@
+openapi: 3.0.3
+info:
+  title: Orders API
+  version: 1.0.0
+paths:
+  /orders/{id}:
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: An order
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+components:
+  schemas:
+    Order:
+      type: object
+      required: [id, status, total]
+      properties:
+        id: { type: string }
+        status: { type: string, enum: [pending, paid] }
+        total: { type: number }
