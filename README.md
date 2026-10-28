@@ -74,7 +74,7 @@ The classification is a heuristic, not a proof. External `$ref` files and URLs a
 
 The same checker runs in the browser at [martingruner.com/tools/openapi-breaking-change-checker](https://martingruner.com/tools/openapi-breaking-change-checker): paste or open two descriptions and export the report.
 
-For desktop review, [Diff Anything](https://martingruner.com/projects/diffanything) compares OpenAPI and JSON Schema files side by side on macOS and Windows, alongside folders, spreadsheets, archives, and code. On Windows, its command line with the Pro upgrade can fail a build only on breaking API changes and write JUnit or SARIF reports.
+For desktop review, [Diff Anything](https://martingruner.com/projects/diffanything) compares OpenAPI and JSON Schema files side by side on macOS and Windows, alongside folders, spreadsheets, archives, and code. With the Pro upgrade, its command line can fail a build only on breaking or unclassified API changes and write JUnit or SARIF reports: on a Mac through the free command-line helper for the Mac App Store version, and on Windows through the Microsoft Store version.
 
 ## Development
 
